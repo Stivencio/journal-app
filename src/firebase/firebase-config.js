@@ -8,6 +8,8 @@ import {
 	createUserWithEmailAndPassword,
 	updateProfile,
 	signInWithEmailAndPassword,
+	onAuthStateChanged,
+	signOut,
 } from "firebase/auth";
 
 // Your web app's Firebase configuration
@@ -37,4 +39,6 @@ export {
 	createUserWithEmailAndPassword,
 	updateProfile,
 	signInWithEmailAndPassword,
+	onAuthStateChanged,
+	signOut,
 };

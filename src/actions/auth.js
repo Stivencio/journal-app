@@ -5,6 +5,7 @@ import {
 	createUserWithEmailAndPassword,
 	updateProfile,
 	signInWithEmailAndPassword,
+	signOut,
 } from "../firebase/firebase-config";
 import { types } from "../types/types";
 import { finishLoading, startLoading } from "./ui";
@@ -61,4 +62,15 @@ export const login = (uid, displayName) => ({
 		uid,
 		displayName,
 	},
+});
+
+export const startLogout = () => {
+	return async (dispatch) => {
+		await signOut(auth);
+		dispatch(logout());
+	};
+};
+
+export const logout = () => ({
+	type: types.logout,
 });
