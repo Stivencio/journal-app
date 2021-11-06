@@ -1,3 +1,5 @@
+import Swal from "sweetalert2";
+
 import {
 	auth,
 	signInWithPopup,
@@ -13,17 +15,16 @@ import { finishLoading, startLoading } from "./ui";
 export const startLoginEmailPassword = (email, password) => {
 	return (dispatch) => {
 		dispatch(startLoading());
-		setTimeout(() => {
-			signInWithEmailAndPassword(auth, email, password)
-				.then(({ user }) => {
-					dispatch(login(user.uid, user.displayName));
-					dispatch(finishLoading());
-				})
-				.catch(function (error) {
-					dispatch(finishLoading());
-					console.log(error.message);
-				});
-		}, 5000);
+		signInWithEmailAndPassword(auth, email, password)
+			.then(({ user }) => {
+				dispatch(login(user.uid, user.displayName));
+				dispatch(finishLoading());
+			})
+			.catch((e) => {
+				dispatch(finishLoading());
+				console.error(e);
+				Swal.fire("Error", e.message, "error");
+			});
 	};
 };
 
